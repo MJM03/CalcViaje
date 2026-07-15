@@ -1,11 +1,11 @@
 {
-  "name": "CalcViaje - Presupuesto de viaje",
+  "name": "CalcViaje - Control diario",
   "short_name": "CalcViaje",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0b1220",
+  "background_color": "#10182b",
   "theme_color": "#5b5ce2",
-  "description": "Planifica y controla presupuestos, gastos, ahorro e itinerarios de viaje.",
+  "description": "Control diario de gastos y proyección de ahorro por persona.",
   "icons": [
     {
       "src": "icon.svg",
