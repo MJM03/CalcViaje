@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4345c8"/><stop offset="1" stop-color="#8b7cf6"/></linearGradient></defs><rect width="512" height="512" rx="120" fill="url(#g)"/><circle cx="390" cy="105" r="92" fill="#fff" opacity=".12"/><path d="M116 170h280v226H116z" rx="35" fill="#fff"/><path d="M164 116v74M348 116v74" stroke="#fff" stroke-width="30" stroke-linecap="round"/><path d="M116 228h280" stroke="#5b5ce2" stroke-width="26"/><path d="M173 286h62M277 286h62M173 344h62M277 344h62" stroke="#5b5ce2" stroke-width="24" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4345c8"/>
+      <stop offset="1" stop-color="#8b7cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#g)"/>
+  <circle cx="396" cy="105" r="90" fill="#fff" opacity=".12"/>
+  <path d="M136 142h240a36 36 0 0 1 36 36v196a36 36 0 0 1-36 36H136a36 36 0 0 1-36-36V178a36 36 0 0 1 36-36Z" fill="#fff"/>
+  <path d="M161 231h190M161 294h126M161 357h86" stroke="#5b5ce2" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="339" cy="333" r="56" fill="#5b5ce2"/>
+  <path d="M339 301v64M307 333h64" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+</svg>

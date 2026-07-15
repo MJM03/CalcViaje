@@ -1,1 +1,38 @@
-var CACHE='calcviaje-v3.0.0';var FILES=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon.svg'];self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(FILES)}));self.skipWaiting()});self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==CACHE}).map(function(x){return caches.delete(x)}))}));self.clients.claim()});self.addEventListener('fetch',function(e){if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request).then(function(resp){var cp=resp.clone();caches.open(CACHE).then(function(c){c.put(e.request,cp)});return resp}).catch(function(){return caches.match('./index.html')})}))});
+var CACHE='calcviaje-base-v1.0.0';
+var FILES=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon.svg'];
+
+self.addEventListener('install',function(event){
+  event.waitUntil(caches.open(CACHE).then(function(cache){
+    return cache.addAll(FILES);
+  }));
+  self.skipWaiting();
+});
+
+self.addEventListener('activate',function(event){
+  event.waitUntil(caches.keys().then(function(keys){
+    return Promise.all(keys.filter(function(key){
+      return key !== CACHE;
+    }).map(function(key){
+      return caches.delete(key);
+    }));
+  }));
+  self.clients.claim();
+});
+
+self.addEventListener('fetch',function(event){
+  if(event.request.method !== 'GET') return;
+
+  event.respondWith(
+    caches.match(event.request).then(function(cached){
+      return cached || fetch(event.request).then(function(response){
+        var copy = response.clone();
+        caches.open(CACHE).then(function(cache){
+          cache.put(event.request, copy);
+        });
+        return response;
+      }).catch(function(){
+        return caches.match('./index.html');
+      });
+    })
+  );
+});

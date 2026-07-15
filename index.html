@@ -3,275 +3,133 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#10182b">
+  <meta name="theme-color" content="#5b5ce2">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="CalcViaje">
-  <title>CalcViaje</title>
+  <title>CalcViaje Base</title>
+
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="splash" class="splash">
-    <div class="splash-logo">✦</div>
-    <h1>CalcViaje</h1>
-    <p>Control diario y proyección inteligente.</p>
-  </div>
-
-  <div class="app-shell">
-    <header class="topbar">
+  <main class="app">
+    <header class="header">
       <div>
-        <span class="eyebrow">CALCVIAJE</span>
-        <h1 id="pageTitle">Inicio</h1>
+        <p class="eyebrow">CALCVIAJE</p>
+        <h1>Presupuesto base</h1>
+        <p class="subtitle">Configura los datos principales del viaje.</p>
       </div>
-      <button id="themeToggle" class="icon-btn" aria-label="Cambiar tema">☾</button>
+      <button id="themeToggle" class="icon-button" aria-label="Cambiar tema">☾</button>
     </header>
 
-    <main class="main-content">
-      <section id="screen-home" class="screen active">
-        <article class="trip-summary">
-          <div>
-            <span class="soft-label">Viaje activo</span>
-            <h2 id="tripName">Cusco 2026</h2>
-            <p id="tripMeta">4 personas · 6 días</p>
+    <section class="form-card">
+      <form id="budgetForm">
+        <div class="field">
+          <label for="budget">Presupuesto total</label>
+          <div class="money-input">
+            <span>S/</span>
+            <input id="budget" name="budget" type="number" min="0" step="0.01" inputmode="decimal" placeholder="5000" required>
           </div>
-          <button class="mini-btn" data-open="tripModal">Editar</button>
-        </article>
+        </div>
 
-        <article class="hero-card">
-          <div class="hero-head">
-            <span>Ahorro final proyectado</span>
-            <span id="healthBadge" class="health-badge">Saludable</span>
+        <div class="two-columns">
+          <div class="field">
+            <label for="people">Personas</label>
+            <input id="people" name="people" type="number" min="1" step="1" inputmode="numeric" placeholder="4" required>
           </div>
-          <strong id="projectedSavings">S/ 0.00</strong>
-          <p id="projectedPerPerson">S/ 0.00 por persona</p>
-          <div class="hero-grid">
-            <div><span>Ahorro confirmado</span><b id="confirmedSavings">S/ 0.00</b></div>
-            <div><span>Disponible restante</span><b id="remainingBudget">S/ 0.00</b></div>
+
+          <div class="field">
+            <label for="days">Días</label>
+            <input id="days" name="days" type="number" min="1" step="1" inputmode="numeric" placeholder="5" required>
           </div>
-        </article>
-
-        <div class="metric-grid">
-          <article class="metric-card"><span>Presupuesto total</span><strong id="totalBudget">S/ 0.00</strong></article>
-          <article class="metric-card"><span>Gastado real</span><strong id="realSpent">S/ 0.00</strong></article>
-          <article class="metric-card"><span>Presupuesto pendiente</span><strong id="pendingBudget">S/ 0.00</strong></article>
-          <article class="metric-card accent"><span>Promedio ahorro/día</span><strong id="avgDailySavings">S/ 0.00</strong></article>
         </div>
 
-        <section class="section-block">
-          <div class="section-header">
-            <div><span class="eyebrow">PROYECCIÓN</span><h3>Escenarios de cierre</h3></div>
+        <div class="field">
+          <label for="hotelDaily">Hotel diario por grupo</label>
+          <div class="money-input">
+            <span>S/</span>
+            <input id="hotelDaily" name="hotelDaily" type="number" min="0" step="0.01" inputmode="decimal" placeholder="300" required>
           </div>
-          <div id="scenarioGrid" class="scenario-grid"></div>
-        </section>
+          <small>Ingresa el costo total diario del hotel para todo el grupo.</small>
+        </div>
 
-        <section class="section-block">
-          <div class="section-header">
-            <div><span class="eyebrow">RESUMEN INTELIGENTE</span><h3>Cómo va el viaje</h3></div>
+        <div class="field">
+          <label for="foodDaily">Comida diaria por grupo</label>
+          <div class="money-input">
+            <span>S/</span>
+            <input id="foodDaily" name="foodDaily" type="number" min="0" step="0.01" inputmode="decimal" placeholder="360" required>
           </div>
-          <div id="insightList" class="insight-list"></div>
-        </section>
-
-        <section class="section-block">
-          <div class="section-header">
-            <div><span class="eyebrow">DÍAS DEL VIAJE</span><h3>Ahorro acumulado</h3></div>
-            <button class="text-btn" data-nav="days">Ver todos</button>
-          </div>
-          <div id="homeDays" class="stack-list"></div>
-        </section>
-      </section>
-
-      <section id="screen-today" class="screen">
-        <div class="screen-head sticky">
-          <div><span class="eyebrow">CONTROL DIARIO</span><h2>Hoy</h2></div>
-          <button class="primary-btn small" data-open="dailyExpenseModal">+ Gasto</button>
+          <small>Ingresa el gasto diario estimado de comida para todo el grupo.</small>
         </div>
 
-        <div class="date-selector">
-          <button id="prevDay" class="icon-btn">‹</button>
-          <div>
-            <span id="selectedDayLabel" class="soft-label">Día 1</span>
-            <h3 id="selectedDateLabel">12 de agosto</h3>
-          </div>
-          <button id="nextDay" class="icon-btn">›</button>
-        </div>
-
-        <article class="daily-hero">
-          <div><span>Presupuesto del día</span><strong id="dayBudget">S/ 0.00</strong></div>
-          <div><span>Gastado hoy</span><strong id="daySpent">S/ 0.00</strong></div>
-          <div><span>Ahorro del día</span><strong id="daySavings">S/ 0.00</strong></div>
-        </article>
-
-        <div id="dailyCategoryList" class="stack-list"></div>
-      </section>
-
-      <section id="screen-days" class="screen">
-        <div class="screen-head sticky">
-          <div><span class="eyebrow">CALENDARIO</span><h2>Días del viaje</h2></div>
-        </div>
-        <div id="allDaysList" class="stack-list"></div>
-      </section>
-
-      <section id="screen-plan" class="screen">
-        <div class="screen-head sticky">
-          <div><span class="eyebrow">PRESUPUESTO BASE</span><h2>Plan diario</h2></div>
-          <button class="primary-btn small" data-open="planModal">Editar</button>
-        </div>
-        <div class="summary-row">
-          <div><span>Hotel diario</span><strong id="planHotel">S/ 0.00</strong></div>
-          <div><span>Comida diaria</span><strong id="planFood">S/ 0.00</strong></div>
-        </div>
-        <div id="planCategoryList" class="stack-list"></div>
-      </section>
-
-      <section id="screen-people" class="screen">
-        <div class="screen-head sticky">
-          <div><span class="eyebrow">VIAJEROS</span><h2>Personas</h2></div>
-          <button class="primary-btn small" data-open="travelerModal">+ Persona</button>
-        </div>
-        <div class="summary-row">
-          <div><span>Viajeros</span><strong id="peopleCount">0</strong></div>
-          <div><span>Proyección por persona</span><strong id="peopleProjection">S/ 0.00</strong></div>
-        </div>
-        <div id="travelerList" class="stack-list"></div>
-      </section>
-
-      <section id="screen-settings" class="screen">
-        <div class="screen-head">
-          <div><span class="eyebrow">CONFIGURACIÓN</span><h2>Ajustes</h2></div>
-        </div>
-
-        <div class="settings-card">
-          <button class="settings-row" data-open="tripModal">
-            <span><b>Editar viaje</b><small>Destino, fechas y presupuesto</small></span><span>›</span>
-          </button>
-          <button class="settings-row" data-open="planModal">
-            <span><b>Editar plan diario</b><small>Hotel, comida y otras categorías</small></span><span>›</span>
-          </button>
-          <button class="settings-row" id="exportBtn">
-            <span><b>Exportar respaldo</b><small>Descarga todos los datos</small></span><span>›</span>
-          </button>
-          <label class="settings-row">
-            <span><b>Importar respaldo</b><small>Restaura un archivo JSON</small></span><span>›</span>
-            <input id="importInput" type="file" accept="application/json" hidden>
-          </label>
-          <button class="settings-row danger" id="resetBtn">
-            <span><b>Restablecer demo</b><small>Borra los cambios locales</small></span><span>›</span>
-          </button>
-        </div>
-
-        <article class="about-card">
-          <div class="about-icon">✦</div>
-          <h3>CalcViaje</h3>
-          <p>Controla cada día del viaje y conoce cuánto podrían recuperar al finalizar.</p>
-          <small>Versión 3.0.0</small>
-        </article>
-      </section>
-    </main>
-
-    <button class="fab" data-open="dailyExpenseModal" aria-label="Registrar gasto">+</button>
-
-    <nav class="bottom-nav">
-      <button class="nav-item active" data-nav="home"><span>⌂</span><small>Inicio</small></button>
-      <button class="nav-item" data-nav="today"><span>☀</span><small>Hoy</small></button>
-      <button class="nav-item" data-nav="days"><span>▦</span><small>Días</small></button>
-      <button class="nav-item" data-nav="plan"><span>◔</span><small>Plan</small></button>
-      <button class="nav-item" data-nav="people"><span>♙</span><small>Personas</small></button>
-      <button class="nav-item" data-nav="settings"><span>⚙</span><small>Ajustes</small></button>
-    </nav>
-  </div>
-
-  <div class="modal" id="tripModal">
-    <div class="modal-bg" data-close></div>
-    <div class="modal-sheet">
-      <div class="grabber"></div>
-      <div class="modal-title"><h3>Datos del viaje</h3><button class="icon-btn" data-close>×</button></div>
-      <form id="tripForm" class="form-grid">
-        <label>Nombre<input name="name" required></label>
-        <label>Destino<input name="destination" required></label>
-        <div class="two-col">
-          <label>Inicio<input name="startDate" type="date" required></label>
-          <label>Fin<input name="endDate" type="date" required></label>
-        </div>
-        <div class="two-col">
-          <label>Presupuesto total<input name="budget" type="number" min="0" step="0.01" required></label>
-          <label>Moneda<select name="currency"><option value="PEN">Soles</option><option value="USD">Dólares</option><option value="EUR">Euros</option></select></label>
-        </div>
-        <button class="primary-btn full">Guardar viaje</button>
+        <button type="submit" class="primary-button">Guardar presupuesto</button>
       </form>
-    </div>
-  </div>
+    </section>
 
-  <div class="modal" id="planModal">
-    <div class="modal-bg" data-close></div>
-    <div class="modal-sheet">
-      <div class="grabber"></div>
-      <div class="modal-title"><h3>Plan diario</h3><button class="icon-btn" data-close>×</button></div>
-      <form id="planForm" class="form-grid">
-        <label>Hotel por día (grupo)<input name="hotel" type="number" min="0" step="0.01" required></label>
-        <label>Comida por persona/día<input name="foodPerPerson" type="number" min="0" step="0.01" required></label>
-        <div class="two-col">
-          <label>Transporte diario<input name="transport" type="number" min="0" step="0.01"></label>
-          <label>Actividades diarias<input name="activities" type="number" min="0" step="0.01"></label>
+    <section class="summary-card">
+      <div class="summary-header">
+        <div>
+          <p class="eyebrow">RESUMEN</p>
+          <h2>Proyección del viaje</h2>
         </div>
-        <div class="two-col">
-          <label>Compras diarias<input name="shopping" type="number" min="0" step="0.01"></label>
-          <label>Otros diarios<input name="other" type="number" min="0" step="0.01"></label>
-        </div>
-        <button class="primary-btn full">Guardar plan</button>
-      </form>
-    </div>
-  </div>
+        <span id="statusBadge" class="status-badge">Sin datos</span>
+      </div>
 
-  <div class="modal" id="dailyExpenseModal">
-    <div class="modal-bg" data-close></div>
-    <div class="modal-sheet">
-      <div class="grabber"></div>
-      <div class="modal-title"><h3>Registrar gasto diario</h3><button class="icon-btn" data-close>×</button></div>
-      <form id="dailyExpenseForm" class="form-grid">
-        <label>Fecha<select name="date" id="expenseDate"></select></label>
-        <label>Categoría
-          <select name="category">
-            <option value="hotel">Hotel</option>
-            <option value="breakfast">Desayuno</option>
-            <option value="lunch">Almuerzo</option>
-            <option value="dinner">Cena</option>
-            <option value="snacks">Snacks</option>
-            <option value="transport">Transporte</option>
-            <option value="activities">Actividades</option>
-            <option value="shopping">Compras</option>
-            <option value="other">Otros</option>
-          </select>
-        </label>
-        <div class="two-col">
-          <label>Monto real<input name="amount" type="number" min="0" step="0.01" required></label>
-          <label>Pagado por<select name="travelerId" id="expenseTraveler"></select></label>
-        </div>
-        <label>Descripción<input name="description" placeholder="Ej. Cena en San Blas" required></label>
-        <button class="primary-btn full">Guardar gasto</button>
-      </form>
-    </div>
-  </div>
+      <div class="hero-total">
+        <span>Saldo estimado al finalizar</span>
+        <strong id="remainingAmount">S/ 0.00</strong>
+        <small id="remainingPerPerson">S/ 0.00 por persona</small>
+      </div>
 
-  <div class="modal" id="travelerModal">
-    <div class="modal-bg" data-close></div>
-    <div class="modal-sheet">
-      <div class="grabber"></div>
-      <div class="modal-title"><h3>Agregar viajero</h3><button class="icon-btn" data-close>×</button></div>
-      <form id="travelerForm" class="form-grid">
-        <label>Nombre<input name="name" required></label>
-        <div class="two-col">
-          <label>Tipo<select name="type"><option value="adult">Adulto</option><option value="child">Niño</option><option value="baby">Bebé</option></select></label>
-          <label>Iniciales<input name="initials" maxlength="2" required></label>
+      <div class="metrics">
+        <article>
+          <span>Hotel total</span>
+          <strong id="hotelTotal">S/ 0.00</strong>
+        </article>
+        <article>
+          <span>Comida total</span>
+          <strong id="foodTotal">S/ 0.00</strong>
+        </article>
+        <article>
+          <span>Gasto proyectado</span>
+          <strong id="projectedSpent">S/ 0.00</strong>
+        </article>
+        <article>
+          <span>Gasto por persona</span>
+          <strong id="spentPerPerson">S/ 0.00</strong>
+        </article>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-labels">
+          <span>Uso del presupuesto</span>
+          <strong id="budgetUsage">0%</strong>
         </div>
-        <button class="primary-btn full">Agregar persona</button>
-      </form>
-    </div>
-  </div>
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h3>Cómo calcula la app</h3>
+      <p>
+        Multiplica el gasto diario de hotel y comida por la cantidad de días,
+        suma ambos conceptos y los resta del presupuesto total.
+      </p>
+    </section>
+
+    <footer>
+      <span>CalcViaje Base</span>
+      <span>v1.0.0</span>
+    </footer>
+  </main>
 
   <div id="toast" class="toast"></div>
+
   <script src="app.js"></script>
 </body>
 </html>

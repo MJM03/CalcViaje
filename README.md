@@ -1,24 +1,34 @@
-# CalcViaje v3.0.0
+# CalcViaje Base v1.0.0
 
-Versión reorganizada para control diario del viaje.
+Primera base modular de la aplicación.
 
-## Funciones
-- Presupuesto diario automático
+## Incluye
+
+- Presupuesto total
+- Cantidad de personas
+- Cantidad de días
 - Hotel diario por grupo
-- Comida diaria por persona
-- Transporte, actividades, compras y otros
-- Registro diario de desayuno, almuerzo, cena y snacks
-- Ahorro diario confirmado
-- Promedio de ahorro por día
-- Proyección de ahorro al finalizar
-- Reparto proyectado por persona
-- Escenario conservador, probable y optimista
-- Calendario completo del viaje
-- Viajeros y control de quién pagó
-- Tema claro/oscuro
-- PWA instalable
-- Exportar/importar respaldo
+- Comida diaria por grupo
+- Hotel total
+- Comida total
+- Gasto total proyectado
+- Gasto proyectado por persona
+- Saldo estimado al finalizar
+- Saldo estimado por persona
+- Indicador de uso del presupuesto
 - Guardado local
+- Tema claro y oscuro
+- PWA instalable
 - Compatible con GitHub Pages y Safari de iPhone
 
-Sube todos los archivos directamente a la raíz del repositorio.
+## Publicar en GitHub Pages
+
+Sube todos los archivos directamente a la raíz del repositorio:
+
+- index.html
+- styles.css
+- app.js
+- manifest.webmanifest
+- sw.js
+- icon.svg
+- README.md

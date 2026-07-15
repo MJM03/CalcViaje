@@ -1,11 +1,11 @@
 {
-  "name": "CalcViaje - Control diario",
+  "name": "CalcViaje Base",
   "short_name": "CalcViaje",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#10182b",
+  "background_color": "#f4f6fb",
   "theme_color": "#5b5ce2",
-  "description": "Control diario de gastos y proyección de ahorro por persona.",
+  "description": "Calculadora base para presupuesto, personas, días, hotel y comida.",
   "icons": [
     {
       "src": "icon.svg",
